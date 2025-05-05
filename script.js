@@ -11,8 +11,29 @@ function tossCoin() {
   }, 300);
 }
 
-// Ajout bouton
-document.getElementById("restartBtn").addEventListener("click", tossCoin);
+// Réinitialiser la pièce
+function resetCoin() {
+  const coin = document.getElementById("coin");
+  coin.textContent = "?";
+  coin.style.backgroundColor = "#333";
+  coin.style.transform = "scale(1)";
+}
+
+// Plein écran
+function toggleFullscreen() {
+  const elem = document.documentElement;
+  if (!document.fullscreenElement) {
+    elem.requestFullscreen().catch(err => {
+      alert(`Erreur plein écran : ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+// Ajout des listeners
+document.getElementById("restartBtn").addEventListener("click", resetCoin);
+document.getElementById("fullscreenBtn").addEventListener("click", toggleFullscreen);
 
 // Détection de secousse
 let lastX, lastY, lastZ;
@@ -30,7 +51,7 @@ window.addEventListener("devicemotion", function (event) {
     const deltaY = Math.abs(y - lastY);
     const deltaZ = Math.abs(z - lastZ);
 
-    const shakeThreshold = 25; // ← sensibilité diminuée (avant 15)
+    const shakeThreshold = 25; // Sensibilité réduite
 
     if ((deltaX + deltaY + deltaZ) > shakeThreshold) {
       const now = Date.now();
