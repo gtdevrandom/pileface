@@ -11,12 +11,12 @@ function tossCoin() {
   }, 300);
 }
 
-// Réinitialiser la pièce
 function resetCoin() {
   const coin = document.getElementById("coin");
   coin.textContent = "?";
   coin.style.backgroundColor = "#333";
   coin.style.transform = "scale(1)";
+  lastShakeTime = Date.now(); // ← évite un tirage immédiat après
 }
 
 // Plein écran
