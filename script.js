@@ -9,6 +9,11 @@ function tossCoin() {
   setTimeout(() => {
     coin.style.transform = "scale(1)";
   }, 300);
+
+  // Vibration (200ms)
+  if (navigator.vibrate) {
+    navigator.vibrate(200);
+  }
 }
 
 function resetCoin() {
@@ -16,7 +21,7 @@ function resetCoin() {
   coin.textContent = "?";
   coin.style.backgroundColor = "#333";
   coin.style.transform = "scale(1)";
-  lastShakeTime = Date.now(); // ← évite un tirage immédiat après
+  lastShakeTime = Date.now(); // évite un tirage immédiat après
 }
 
 // Plein écran
